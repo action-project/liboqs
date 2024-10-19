@@ -154,7 +154,7 @@ void KeccakP1600times4_AddLanesAll(void *states, const unsigned char *data, unsi
 	V256 *stateAsLanes = (V256 *)states;
 	unsigned int i;
 	const unsigned char *curData0 = data;
-	const unsigned char *curData1 = data + laneOffset * SnP_laneLengthInBytes;
+	const unsigned char *curData1 = data + laneOffset *SnP_laneLengthInBytes;
 	const unsigned char *curData2 = data + laneOffset * 2 * SnP_laneLengthInBytes;
 	const unsigned char *curData3 = data + laneOffset * 3 * SnP_laneLengthInBytes;
 	V256    lanes0, lanes1, lanes2, lanes3, lanesL01, lanesL23, lanesH01, lanesH23;
@@ -233,7 +233,7 @@ void KeccakP1600times4_OverwriteLanesAll(void *states, const unsigned char *data
 	V256 *stateAsLanes = (V256 *)states;
 	unsigned int i;
 	const unsigned char *curData0 = data;
-	const unsigned char *curData1 = data + laneOffset * SnP_laneLengthInBytes;
+	const unsigned char *curData1 = data + laneOffset *SnP_laneLengthInBytes;
 	const unsigned char *curData2 = data + laneOffset * 2 * SnP_laneLengthInBytes;
 	const unsigned char *curData3 = data + laneOffset * 3 * SnP_laneLengthInBytes;
 	V256    lanes0, lanes1, lanes2, lanes3, lanesL01, lanesL23, lanesH01, lanesH23;
@@ -720,31 +720,31 @@ void KeccakP1600times4_ExtractAndAddLanesAll(const void *states, const unsigned 
 \
 
 static ALIGN(KeccakP1600times4_statesAlignment_avx2) const uint64_t KeccakF1600RoundConstants[24] = {
-	0x0000000000000001ULL,
-	0x0000000000008082ULL,
-	0x800000000000808aULL,
-	0x8000000080008000ULL,
-	0x000000000000808bULL,
-	0x0000000080000001ULL,
-	0x8000000080008081ULL,
-	0x8000000000008009ULL,
-	0x000000000000008aULL,
-	0x0000000000000088ULL,
-	0x0000000080008009ULL,
-	0x000000008000000aULL,
-	0x000000008000808bULL,
-	0x800000000000008bULL,
-	0x8000000000008089ULL,
-	0x8000000000008003ULL,
-	0x8000000000008002ULL,
-	0x8000000000000080ULL,
-	0x000000000000800aULL,
-	0x800000008000000aULL,
-	0x8000000080008081ULL,
-	0x8000000000008080ULL,
-	0x0000000080000001ULL,
-	0x8000000080008008ULL
-};
+        0x0000000000000001ULL,
+        0x0000000000008082ULL,
+        0x800000000000808aULL,
+        0x8000000080008000ULL,
+        0x000000000000808bULL,
+        0x0000000080000001ULL,
+        0x8000000080008081ULL,
+        0x8000000000008009ULL,
+        0x000000000000008aULL,
+        0x0000000000000088ULL,
+        0x0000000080008009ULL,
+        0x000000008000000aULL,
+        0x000000008000808bULL,
+        0x800000000000008bULL,
+        0x8000000000008089ULL,
+        0x8000000000008003ULL,
+        0x8000000000008002ULL,
+        0x8000000000000080ULL,
+        0x000000000000800aULL,
+        0x800000008000000aULL,
+        0x8000000080008081ULL,
+        0x8000000000008080ULL,
+        0x0000000080000001ULL,
+        0x8000000080008008ULL
+    };
 
 #define copyFromState(X, state) \
     X##ba = LOAD256(state[ 0]); \

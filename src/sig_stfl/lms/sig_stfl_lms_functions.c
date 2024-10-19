@@ -269,7 +269,7 @@ int oqs_sig_stfl_lms_keypair(uint8_t *pk, OQS_SIG_STFL_SECRET_KEY *sk, const uin
 
 	oqs_key_data->levels = 1;
 	oqs_key_data->len_sec_key = sk->length_secret_key;
-	oqs_key_data->sec_key = (uint8_t *)malloc(sk->length_secret_key * sizeof(uint8_t));
+	oqs_key_data->sec_key = (uint8_t *)malloc(sk->length_secret_key *sizeof(uint8_t));
 	if (oqs_key_data->sec_key == NULL) {
 		OQS_MEM_insecure_free(oqs_key_data);
 		oqs_key_data = NULL;
@@ -527,7 +527,7 @@ int oqs_sig_stfl_lms_keypair(uint8_t *pk, OQS_SIG_STFL_SECRET_KEY *sk, const uin
 		memcpy(pk, oqs_key_data->public_key, len_public_key);
 		sk->secret_key_data = oqs_key_data;
 	} else {
-		OQS_MEM_secure_free(oqs_key_data->sec_key, sk->length_secret_key * sizeof(uint8_t));
+		OQS_MEM_secure_free(oqs_key_data->sec_key, sk->length_secret_key *sizeof(uint8_t));
 		OQS_MEM_insecure_free(oqs_key_data->aux_data);
 		OQS_MEM_insecure_free(oqs_key_data);
 		oqs_key_data = NULL;
@@ -694,7 +694,7 @@ OQS_STATUS oqs_serialize_lms_key(uint8_t **sk_key, size_t *sk_len, const OQS_SIG
 		return OQS_ERROR;
 	}
 
-	uint8_t *sk_key_buf = malloc(key_len * sizeof(uint8_t));
+	uint8_t *sk_key_buf = malloc(key_len *sizeof(uint8_t));
 
 	if (sk_key_buf == NULL) {
 		return OQS_ERROR;
@@ -761,7 +761,7 @@ OQS_STATUS oqs_deserialize_lms_key(OQS_SIG_STFL_SECRET_KEY *sk, const uint8_t *s
 	}
 
 	lms_key_data = malloc(sizeof(oqs_lms_key_data));
-	lms_sk = malloc(lms_sk_len * sizeof(uint8_t));
+	lms_sk = malloc(lms_sk_len *sizeof(uint8_t));
 
 	if (lms_key_data == NULL || lms_sk == NULL) {
 		goto err;
@@ -773,7 +773,7 @@ OQS_STATUS oqs_deserialize_lms_key(OQS_SIG_STFL_SECRET_KEY *sk, const uint8_t *s
 	lms_key_data->context = context;
 
 	if (aux_buf_len) {
-		lms_aux = malloc(aux_buf_len * sizeof(uint8_t));
+		lms_aux = malloc(aux_buf_len *sizeof(uint8_t));
 
 		if (lms_aux == NULL) {
 			goto err;

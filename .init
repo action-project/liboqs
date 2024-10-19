@@ -1,0 +1,44 @@
+#!/bin/bash
+set -eo pipefail
+
+INVALID=$2
+if [[ -n $INVALID ]]; then
+  echo "only one operation allowed per command"
+  exit 1
+fi
+
+PARENT_DIR=$(pwd)
+
+OPERATION=$1
+case "$OPERATION" in
+  install)
+    OPERATION=install
+    ;;
+  *)
+    echo "Unsupported operation"
+    exit 1
+    ;;
+esac
+
+DISTRO=$(cat /etc/os-release | grep ^ID= | cut -d "=" -f 2)
+LIB_SUFFIX=
+case "$DISTRO" in
+    fedora*)
+        if [[ $OPERATION == 'install' ]] ; then
+            sudo dnf install astyle cmake gcc ninja-build openssl-devel python3-pytest python3-pytest-xdist unzip xsltproc doxygen graphviz python3-yaml valgrind -y
+        fi
+        exit 0
+        ;;
+    ubuntu*)
+        if [[ $OPERATION == 'install' ]] ; then
+            sudo apt install astyle cmake gcc ninja-build libssl-dev python3-pytest python3-pytest-xdist unzip xsltproc doxygen graphviz python3-yaml valgrind -y
+        fi
+        exit 0
+        ;;
+    *)
+        echo "unsupported distribution"
+        exit 1
+        ;;
+esac
+
+cd "{$PARENT_DIR}"

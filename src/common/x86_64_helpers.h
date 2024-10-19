@@ -37,7 +37,7 @@ static inline uint32_t xgetbv_eax(uint32_t xcr) {
 }
 
 static unsigned int has_mask(const uint32_t value, const uint32_t mask) {
-	return (value & mask) == mask;
+	return (value &mask) == mask;
 }
 
 static inline unsigned int is_bit_set(const uint32_t val, const unsigned int bit_pos) {
